@@ -3,13 +3,20 @@ pragma solidity >=0.5.0 <0.9.0;
 
 contract myGame {
 
-    Player[] public players;
+
+    uint public playerCount =0;
+    mapping (address => Player) public players;
 
     struct Player {
+        address playerAddress;
         string firstname;
         string lastname;
     }
     function addPlayer(string memory firstname, string memory lastname) public {
-        players.push(Player(firstname, lastname));
+        players[msg.sender] = Player(msg.sender, firstname, lastname);
+        playerCount += 1;
     }
+    // function getPlayers() public view returns (uint) {
+    //     return playerCount;
+    // }
 }
